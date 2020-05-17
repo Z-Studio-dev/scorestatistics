@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.scorestatistics.demo.mapper.UserMapper">
+
+    <select id="findByUsernameAndPassword" parameterType="cn.scorestatistics.demo.model.entity.TbUser" resultType="TbUser">
+        select * from tb_user where username = #{username} and password = #{password} and state = 1
+    </select>
+    <select id="selectByUsername" parameterType="cn.scorestatistics.demo.model.entity.TbUser" resultType="TbUser">
+        select * from tb_user where username = #{username}
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultType="TbUser">
+        select * from tb_user where id = #{id}
+    </select>
+    <select id="findByUsername" parameterType="cn.scorestatistics.demo.model.entity.TbUser" resultType="TbUser">
+        select * from tb_user where username = #{username}
+    </select>
+    <update id="updateByPrimaryKey" parameterType="cn.scorestatistics.demo.model.entity.TbUser">
+        update tb_user
+        set state = #{tbUser.state},
+            updated = #{tbUser.updated}
+        where username = #{tbUser.username}
+    </update>
+    <update id="updateRoleByUsername" parameterType="cn.scorestatistics.demo.model.entity.TbUser">
+        update tb_user
+        set role_id = #{tbUser.role_id},updated = #{tbUser.updated}
+        where username = #{tbUser.username}
+    </update>
+    <insert id="insert">
+        insert into tb_user(id, username, password,
+            nickname, created,
+            updated, sex, state,
+            file, description, role_id)
+        values(#{tbUser.id}, #{tbUser.username}, #{tbUser.password},
+             #{tbUser.nickname},#{tbUser.created},
+             #{tbUser.updated},#{tbUser.sex}, #{tbUser.state},
+             #{tbUser.file}, #{tbUser.description}, #{tbUser.role_id})
+    </insert>
+</mapper>

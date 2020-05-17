@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.scorestatistics.demo.mapper.ClassMapper">
+
+    <!-- 查询所有班级 -->
+    <select id="findAll" parameterType="cn.scorestatistics.demo.model.entity.Classmanager" resultType="Classmanager">
+        select * from tb_class order by grade;
+    </select>
+
+    <!-- 根据id查询班级 -->
+    <select id="findById" parameterType="cn.scorestatistics.demo.model.entity.Classmanager" resultType="Classmanager">
+        select * from tb_class where id = #{id}
+    </select>
+
+    <!-- 根据班级名称查询班级 -->
+    <select id="findByClassName" parameterType="cn.scorestatistics.demo.model.entity.Classmanager" resultType="Classmanager">
+        select * from tb_class where state = 1 and classname = #{classname}
+    </select>
+
+    <!-- 根据年级查询班级 -->
+    <select id="findAllByGrade" parameterType="cn.scorestatistics.demo.model.entity.Classmanager" resultType="Classmanager">
+        select * from tb_class where grade = #{grade}
+    </select>
+
+    <!-- 根据专业查询班级 -->
+    <select id="findAllByProfession" parameterType="cn.scorestatistics.demo.model.entity.Classmanager" resultType="Classmanager">
+        select * from tb_class where profession = #{profession}
+    </select>
+
+    <!-- 新增班级 -->
+    <insert id="insert">
+        insert into tb_class(id, classname, total,
+            grade, profession, state,
+            description, created, updated)
+        values(#{classmanager.id}, #{classmanager.classname}, #{classmanager.total},
+            #{classmanager.grade}, #{classmanager.profession}, #{classmanager.state},
+            #{classmanager.description}, #{classmanager.created}, #{classmanager.updated})
+    </insert>
+
+    <!-- 更新班级信息 -->
+
+    <!-- 根据id称删除班级 -->
+    <delete id="del">
+        delete from tb_class where id = #{id}
+    </delete>
+
+    <!-- 根据id禁用/启用 班级 -->
+    <update id="disenaCLass">
+        update tb_class set state = #{state} where id = #{id}
+    </update>
+</mapper>

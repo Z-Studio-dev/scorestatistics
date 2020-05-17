@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.scorestatistics.demo.mapper.StudentMapper">
+
+    <select id="countByStudent" parameterType="cn.scorestatistics.demo.model.entity.TbStudent" resultType="java.lang.Long">
+        select count(*) from tb_student where state != 2
+    </select>
+    <select id="countByRemoveStudent" parameterType="cn.scorestatistics.demo.model.entity.TbStudent" resultType="java.lang.Long">
+        select count(*) from tb_student where state = 2
+    </select>
+    <select id="countByClassName" parameterType="cn.scorestatistics.demo.model.entity.TbStudent" resultType="java.lang.Long">
+        select count(*) from tb_student where state != 2 and inclass = #{className}
+    </select>
+    <select id="selectByRemoveStudentInfo" parameterType="string" resultType="TbStudent">
+        select * from tb_student where state = 2 and
+        (username like #{search} or sex like #{search} or inclass like #{search})
+    </select>
+    <select id="selectByStudentInfo" parameterType="string" resultType="TbStudent">
+        select * from tb_student where state != 2 and
+        (username like #{search} or sex like #{search} or inclass like #{search})
+    </select>
+    <select id="selectStudentInfoByClassName" parameterType="string" resultType="TbStudent">
+        select * from tb_student where state = 1 and inclass = #{classname} order by ${sortColumn} ${sort}
+    </select>
+    <select id="selectByUsername" parameterType="cn.scorestatistics.demo.model.entity.TbStudent" resultType="TbStudent">
+        select * from tb_student where username = #{username}
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultType="TbStudent">
+        select * from tb_student where id = #{id}
+    </select>
+    <update id="updateByPrimaryKey" parameterType="cn.scorestatistics.demo.model.entity.TbStudent">
+        update tb_student
+        set state = #{tbStudent.state},
+            updated = #{tbStudent.updated}
+        where id = #{tbStudent.id}
+    </update>
+    <update id="updateFractionByPrimaryKey" parameterType="cn.scorestatistics.demo.model.entity.TbStudent">
+        update tb_student
+        set fraction = #{tbStudent.fraction},fraction_change = #{tbStudent.fraction_change}
+        where id = #{tbStudent.id}
+    </update>
+    <update id="updateRoleByPrimaryKey" parameterType="cn.scorestatistics.demo.model.entity.TbStudent">
+        update tb_student
+        set role_id = #{tbStudent.role_id},updated = #{tbStudent.updated}
+        where id = #{tbStudent.id}
+    </update>
+    <insert id="insert">
+        insert into tb_student(id, username, password,
+            nickname, inclass, fraction,
+            fraction_change, sex, state,
+            description, role_id, file,
+            created, updated)
+        values(#{tbStudent.id}, #{tbStudent.username}, #{tbStudent.password},
+             #{tbStudent.nickname}, #{tbStudent.inclass}, #{tbStudent.fraction},
+             #{tbStudent.fraction_change}, #{tbStudent.sex}, #{tbStudent.state},
+             #{tbStudent.description}, #{tbStudent.role_id},  #{tbStudent.file},
+             #{tbStudent.created}, #{tbStudent.updated} )
+    </insert>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from tb_student
+        where id = #{id}
+    </delete>
+</mapper>
