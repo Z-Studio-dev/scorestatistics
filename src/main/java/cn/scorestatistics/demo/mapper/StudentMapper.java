@@ -25,9 +25,13 @@ public interface StudentMapper {
 
     TbStudent selectByPrimaryKey(@Param("id")Long id);
 
+    List<Long> selectIdByState(@Param("state")int state);
+
     int updateByPrimaryKey(@Param("tbStudent")TbStudent tbStudent);
 
     int updateFractionByPrimaryKey(@Param("tbStudent")TbStudent tbStudent);
+
+    int updateFractionChange(List<Long> list);
 
     int updateRoleByPrimaryKey(@Param("tbStudent")TbStudent tbStudent);
 

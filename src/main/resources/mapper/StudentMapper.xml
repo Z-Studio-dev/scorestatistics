@@ -28,6 +28,9 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultType="TbStudent">
         select * from tb_student where id = #{id}
     </select>
+    <select id="selectIdByState" parameterType="int" resultType="Long">
+        select id from tb_student where state = #{state}
+    </select>
     <update id="updateByPrimaryKey" parameterType="cn.scorestatistics.demo.model.entity.TbStudent">
         update tb_student
         set state = #{tbStudent.state},
@@ -38,6 +41,14 @@
         update tb_student
         set fraction = #{tbStudent.fraction},fraction_change = #{tbStudent.fraction_change}
         where id = #{tbStudent.id}
+    </update>
+    <update id="updateFractionChange" parameterType="java.util.List">
+        update tb_student
+        set fraction_change = concat(fraction_change, concat(',', fraction))
+        where id IN
+        <foreach collection="list" index="index" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
     </update>
     <update id="updateRoleByPrimaryKey" parameterType="cn.scorestatistics.demo.model.entity.TbStudent">
         update tb_student

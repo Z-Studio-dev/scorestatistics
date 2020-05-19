@@ -12,7 +12,7 @@ public class StudentDto {
 
     private int fraction;
 
-    private int fraction_change;
+    private String fraction_change;
 
     private String sex;
 
@@ -62,11 +62,11 @@ public class StudentDto {
         this.fraction = fraction;
     }
 
-    public int getFraction_change() {
+    public String getFraction_change() {
         return fraction_change;
     }
 
-    public void setFraction_change(int fraction_change) {
+    public void setFraction_change(String fraction_change) {
         this.fraction_change = fraction_change;
     }
 

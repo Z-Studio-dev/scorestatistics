@@ -38,6 +38,7 @@ F:\Z-StudioWorkspace\scorestatistics\src\main\java\cn\scorestatistics\demo\model
 F:\Z-StudioWorkspace\scorestatistics\src\main\java\cn\scorestatistics\demo\service\impl\RegisterServiceImpl.java
 F:\Z-StudioWorkspace\scorestatistics\src\main\java\cn\scorestatistics\demo\model\dto\DtoUtil.java
 F:\Z-StudioWorkspace\scorestatistics\src\main\java\cn\scorestatistics\demo\controller\FractionController.java
+F:\Z-StudioWorkspace\scorestatistics\src\main\java\cn\scorestatistics\demo\utils\TimerUtil.java
 F:\Z-StudioWorkspace\scorestatistics\src\main\java\cn\scorestatistics\demo\service\impl\TeacherServiceImpl.java
 F:\Z-StudioWorkspace\scorestatistics\src\main\java\cn\scorestatistics\demo\model\pojo\DataTablesResult.java
 F:\Z-StudioWorkspace\scorestatistics\src\main\java\cn\scorestatistics\demo\service\intf\ManagerService.java

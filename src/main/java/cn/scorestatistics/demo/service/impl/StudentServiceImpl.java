@@ -179,6 +179,7 @@ public class StudentServiceImpl implements StudentService {
         tbStudent.setUsername(tbStudent.getUsername());
         tbStudent.setNickname(tbStudent.getNickname());
         tbStudent.setInclass(tbStudent.getInclass());
+        tbStudent.setFraction_change("0");
         tbStudent.setState(1);
         tbStudent.setRole_id(1);
         tbStudent.setCreated(new Date());
