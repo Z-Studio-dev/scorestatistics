@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.scorestatistics.demo.mapper.LogMapper">
+
+    <select id="countByLog" parameterType="cn.scorestatistics.demo.model.entity.TbLog" resultType="java.lang.Long">
+        select count(*) from tb_log;
+    </select>
+    <select id="selectByMulti" parameterType="string" resultType="TbLog">
+        select * from tb_log
+        where
+        (id like #{search} or name like #{search} or type like #{search} or
+         url like #{search} or request_type like #{search} or request_param like #{search} or
+         user like #{search} or ip like #{search} or ip_info like #{search} or
+         time like #{search} or create_date like #{search})
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultType="TbLog">
+        select * from tb_log where id = #{id}
+    </select>
+    <insert id="insert">
+        insert into tb_log(id, name, type,
+            url, request_type, request_param,
+            user, ip, ip_info,
+            time, create_date)
+        values(#{tbLog.id}, #{tbLog.name}, #{tbLog.type},
+            #{tbLog.url}, #{tbLog.request_type}, #{tbLog.request_param},
+            #{tbLog.user}, #{tbLog.ip}, #{tbLog.ip_info},
+            #{tbLog.time}, #{tbLog.create_date})
+    </insert>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from tb_log
+        where id = #{id}
+    </delete>
+</mapper>

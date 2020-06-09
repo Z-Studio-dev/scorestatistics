@@ -12,6 +12,7 @@ import org.springframework.util.DigestUtils;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -66,7 +67,7 @@ public class UserServiceImpl implements UserService {
             throw new ScoreException("用户名获取用户失败");
         }
         if(!list.isEmpty()) {
-            list.get(0).setPassword("");
+//            list.get(0).setPassword("");
             return list.get(0);
         }
         return null;
@@ -103,5 +104,17 @@ public class UserServiceImpl implements UserService {
             throw new ScoreException("修改学生状态失败");
         }
         return null;
+    }
+
+    @Override
+    public Set<String> getRoles(String username) {
+
+        return userMapper.getRoles(username);
+    }
+
+    @Override
+    public Set<String> getPermissions(String username) {
+
+        return userMapper.getPermissions(username);
     }
 }

@@ -11,63 +11,53 @@ public class TbPermission {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
-    private String professional_title;
+    private Integer roleId;
 
-    private String description;
+    private String name;
 
-    private Date created;
-
-    private Date updated;
+    private String permission;
 
     public TbPermission() {
     }
-    public TbPermission(long id, String professional_title, String description, Date created, Date updated) {
+
+    public TbPermission(Long id, Integer roleId, String name, String permission) {
         this.id = id;
-        this.professional_title = professional_title;
-        this.description = description;
-        this.created = created;
-        this.updated = updated;
+        this.roleId = roleId;
+        this.name = name;
+        this.permission = permission;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getProfessional_title() {
-        return professional_title;
+    public Integer getRoleId() {
+        return roleId;
     }
 
-    public void setProfessional_title(String professional_title) {
-        this.professional_title = professional_title;
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
-    public String getDescription() {
-        return description;
+    public String getName() {
+        return name;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
-    public Date getCreated() {
-        return created;
+    public String getPermission() {
+        return permission;
     }
 
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    public Date getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(Date updated) {
-        this.updated = updated;
+    public void setPermission(String permission) {
+        this.permission = permission == null ? null : permission.trim();
     }
 }

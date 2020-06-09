@@ -21,6 +21,8 @@
         <json.version>20171018</json.version>
         <mail.version>1.5.0-b01</mail.version>
         <pagehelper.version>4.1.6</pagehelper.version>
+        <shiro.version>1.4.0</shiro.version>
+        <hutool.version>4.0.5</hutool.version>
     </properties>
     <dependencies>
         <dependency>
@@ -92,7 +94,12 @@
             <artifactId>springfox-swagger2</artifactId>
             <version>2.7.0</version>
         </dependency>
-
+        <!-- Shiro -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-all</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
         <!-- Redis客户端 -->
         <dependency>
             <groupId>redis.clients</groupId>
@@ -129,7 +136,12 @@
             <artifactId>mail</artifactId>
             <version>${mail.version}</version>
         </dependency>
-
+        <!-- Hutool工具包 -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

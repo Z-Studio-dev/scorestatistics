@@ -1,5 +1,6 @@
 package cn.scorestatistics.demo.controller;
 
+import cn.scorestatistics.demo.annotation.FractionControllerLog;
 import cn.scorestatistics.demo.model.dto.front.StudentDto;
 import cn.scorestatistics.demo.model.entity.TbStudent;
 import cn.scorestatistics.demo.model.pojo.DataTablesResult;
@@ -104,7 +105,8 @@ public class StudentController {
 
     @RequestMapping(value = "/student/fraction", method = RequestMethod.PUT)
     @ApiOperation(value = "修改学生分数")
-    public Result<TbStudent> changeScore(Long id, Integer fraction) {
+    @FractionControllerLog(description = "修改分数")
+    public Result<TbStudent> changeScore(Long id, Integer fraction, String operator) {
 
         TbStudent tbStudent = studentService.alertStudentFraction(id, fraction);
 

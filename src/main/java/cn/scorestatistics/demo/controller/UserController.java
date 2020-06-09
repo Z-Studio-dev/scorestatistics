@@ -1,5 +1,6 @@
 package cn.scorestatistics.demo.controller;
 
+import cn.scorestatistics.demo.annotation.SystemControllerLog;
 import cn.scorestatistics.demo.jedis.JedisClient;
 import cn.scorestatistics.demo.model.dto.front.User;
 import cn.scorestatistics.demo.model.dto.front.UserDto;
@@ -13,7 +14,11 @@ import cn.scorestatistics.demo.service.intf.UserService;
 import cn.scorestatistics.demo.utils.ResultUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,10 +36,17 @@ public class UserController {
 
     @RequestMapping(value = "/user/login", method = RequestMethod.POST)
     @ApiOperation(value = "用户登录")
+//    @SystemControllerLog(description = "登录系统")
     public Result<User> login(@RequestBody UserLoginRegist userLoginRegist,
                                 HttpServletRequest request) {
         User user = loginService.userLogin(userLoginRegist.getUserName(), userLoginRegist.getUserPwd());
-
+//        if(user != null) {
+//            Subject subject = SecurityUtils.getSubject();
+//            // MD5加密
+//            String md5Pass = DigestUtils.md5DigestAsHex(userLoginRegist.getUserPwd().getBytes());
+//            UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), md5Pass);
+//            subject.login(token);
+//        }
         return new ResultUtil<User>().setData(user);
     }
 
@@ -54,7 +66,7 @@ public class UserController {
         int result = registerService.register(userLoginRegist.getUserName(), userLoginRegist.getUserPwd());
         if (result == 0) {
             return new ResultUtil<Object>().setErrorMsg("该用户名已被注册");
-        } else if (result == 1) {
+        } else if (result == -1) {
             return new ResultUtil<Object>().setErrorMsg("用户名密码不能为空");
         }
         return new ResultUtil<Object>().setData(result);

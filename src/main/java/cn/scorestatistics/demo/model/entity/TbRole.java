@@ -10,26 +10,37 @@ public class TbRole {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String name;
 
     private String description;
 
+    private Integer[] roles;
+
     public TbRole() {
     }
 
-    public TbRole(long id, String name, String description) {
+    public TbRole(Long id, String name, String description, Integer[] roles) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.roles = roles;
     }
 
-    public long getId() {
+    public Integer[] getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Integer[] roles) {
+        this.roles = roles;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -38,7 +49,7 @@ public class TbRole {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name == null ? null : name.trim();
     }
 
     public String getDescription() {
@@ -46,6 +57,6 @@ public class TbRole {
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.description = description == null ? null : description.trim();
     }
 }

@@ -1,8 +1,12 @@
 package cn.scorestatistics.demo.service.impl;
 
+import cn.scorestatistics.demo.exception.ScoreException;
 import cn.scorestatistics.demo.mapper.FractionMapper;
-import cn.scorestatistics.demo.model.entity.Fraction;
+import cn.scorestatistics.demo.model.entity.TbFractionLog;
+import cn.scorestatistics.demo.model.pojo.DataTablesResult;
 import cn.scorestatistics.demo.service.intf.FractionService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,77 +18,46 @@ public class FractionSevericelmpl implements FractionService{
     @Autowired
     private FractionMapper fractionMapper;
 
-    /**
-     * 根据id查询成绩
-     * @param id
-     * @return
-     */
+
     @Override
-    public Fraction findById(long id) {
-        return fractionMapper.findById(id);
+    public int addLog(TbFractionLog tbFractionLog) {
+        if(fractionMapper.insert(tbFractionLog) != 1) {
+            throw new ScoreException("保存分数日志失败");
+        }
+        return 1;
     }
 
-    /**
-     * 根据名字查询成绩
-     * @param username
-     * @return
-     */
     @Override
-    public List<Fraction> findByName(String username) { return fractionMapper.findByName(username);}
+    public DataTablesResult getFractionLogList(int draw, int start, int length, String search, List<String> managerClass) {
+        DataTablesResult result = new DataTablesResult();
+        // 分页
+        PageHelper.startPage(start, length);
+        List<TbFractionLog> list = fractionMapper.selectByMulti("%"+search+"%", managerClass);
+        PageInfo<TbFractionLog> pageInfo = new PageInfo<>(list);
 
-    /**
-     * 根据姓名模糊查询
-     * @param username
-     * @return
-     */
-    @Override
-    public List<Fraction> selectByName(String username) { return fractionMapper.selectByName(username); }
+        result.setRecordsTotal((int)pageInfo.getTotal());
+        result.setRecordsFiltered(Math.toIntExact(countFractionLog()));
 
+        result.setDraw(draw);
+        result.setData(list);
 
-    /**
-     * 查询同一班级所有学生的信息
-     * @param classname
-     * @return
-     */
-    @Override
-    public List<Fraction> findByClassName(String classname) { return fractionMapper.findByClassName(classname); }
-
-    /**
-     * 加分
-     * @param num
-     * @param id
-     * @return
-     */
-    @Override
-    public int jiafen(long num, long id) { return fractionMapper.bouns(num,id); }
-
-
-    /**
-     * 减分
-     * @param num
-     * @param id
-     * @return
-     */
-    @Override
-    public int Subtraction(long num, long id) {return fractionMapper.Subtraction(num,id);
+        return result;
     }
 
-    /**
-     * 点击一次加一分
-     * @param id
-     * @return
-     */
     @Override
-    public int oneBouns(long id) {
-        return fractionMapper.oneBouns(id);
+    public Long countFractionLog() {
+        Long result = fractionMapper.countByLog();
+        if(result == null) {
+            throw new ScoreException("获取分数日志数量失败");
+        }
+        return result;
     }
 
-
-    /**
-     * 点击一次减一分
-     * @param id
-     * @return
-     */
     @Override
-    public int oneSubtraction(long id) { return fractionMapper.oneSubtraction(id); }
+    public int deleteLog(Long id) {
+        if(fractionMapper.deleteByPrimaryKey(id) != 1) {
+            throw new ScoreException("删除分数日志失败");
+        }
+        return 1;
+    }
 }

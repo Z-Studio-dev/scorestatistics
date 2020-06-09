@@ -4,6 +4,8 @@ import cn.scorestatistics.demo.model.dto.front.UserDto;
 import cn.scorestatistics.demo.model.entity.TbUser;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 @Service
 public interface UserService {
 
@@ -43,4 +45,19 @@ public interface UserService {
      * @return
      */
     TbUser alertUserState(String username, Integer state);
+
+    /**
+     * 通过用户名获取角色
+     * @param username
+     * @return
+     */
+    Set<String> getRoles(String username);
+
+    /**
+     * 通过用户名获取权限
+     * @param username
+     * @return
+     */
+    Set<String> getPermissions(String username);
+
 }

@@ -35,4 +35,24 @@
              #{tbUser.updated},#{tbUser.sex}, #{tbUser.state},
              #{tbUser.file}, #{tbUser.description}, #{tbUser.role_id})
     </insert>
+    <select id="getRoles" resultType="String">
+    SELECT
+	r. NAME
+    FROM
+	tb_user u
+    JOIN tb_role r ON u.role_id = r.id
+    WHERE
+	u.username = #{username}
+  </select>
+    <select id="getPermissions" resultType="String">
+    SELECT
+	p.permission
+    FROM
+	tb_user u
+    JOIN tb_role r ON u.role_id = r.id
+    JOIN tb_role_perm rp ON rp.role_id = u.role_id
+	JOIN tb_permission p ON rp.permission_id = p.id
+    WHERE
+	u.username = #{username}
+  </select>
 </mapper>
